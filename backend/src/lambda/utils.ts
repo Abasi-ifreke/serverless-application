@@ -15,6 +15,6 @@ export function getUserId(event: APIGatewayProxyEvent): string {
   return parseUserId(jwtToken)
 }
 
-export function getTokenFromAuthorizationHeader(authValue: string){
-  return authValue.split(' ')[1];
-}
+// export function getTokenFromAuthorizationHeader(authValue: string){
+//   return authValue.split(' ')[1];
+// }
