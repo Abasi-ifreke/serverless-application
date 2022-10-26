@@ -1,15 +1,17 @@
 import * as AWS from 'aws-sdk'
 import { createLogger } from '../utils/logger'
-// const AWSXRay = require('aws-xray-sdk')
+const AWSXRay = require('aws-xray-sdk')
 
 
 // // TODO: Implement the fileStogare logic
 const logger = createLogger('AttachmentUtils')
+const XAWS = AWSXRay.captureAWS(AWS)
+
 
 export class AttachmentUtils {
 
   constructor(
-      private readonly s3Client: AWS.S3 = new AWS.S3({ signatureVersion: 'v4' }),
+      private readonly s3Client: AWS.S3 = new XAWS.S3({ signatureVersion: 'v4' }),
       private readonly attachmentS3Bucket = process.env.ATTACHMENT_S3_BUCKET,
       private readonly signedUrlExpiration = process.env.SIGNED_URL_EXPIRATION
   ) {}

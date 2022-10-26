@@ -1,11 +1,11 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import 'source-map-support/register'
-import { createTodo } from '../../helpers/todos'
+import { createTodo } from '../../businessLogic/todos'
 import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
 import { CreateTodoRequest } from '../../requests/CreateTodoRequest'
 import { createLogger } from '../../utils/logger'
-import { getUserId } from '../utils';
+// import { getUserId } from '../utils';
 //import { createTodo } from '../../businessLogic/todos'
 
 // import { createTodo } from '../../helpers/todosAcess'
@@ -24,7 +24,7 @@ export const handler = middy(
   // const authorization = event.headers.Authorization
   // const split = authorization.split(' ')
   // const jwtToken = split[1]
-  const todo = await createTodo(newTodo, getUserId(event))
+  const todo = await createTodo(newTodo, event)
     //  await createTodo(todo)
      
     return {

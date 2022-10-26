@@ -4,11 +4,11 @@ import 'source-map-support/register'
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import * as middy from 'middy'
 import { cors, httpErrorHandler } from 'middy/middlewares'
-import { deleteTodo } from '../../helpers/todos';
+import { deleteTodo } from '../../businessLogic/todos';
 // import { deleteTodo } from '../../helpers/todosAcess';
 
 //import { deleteTodo } from '../../businessLogic/todos'
-import { getUserId } from '../utils'
+// import { getUserId } from '../utils'
 
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -17,7 +17,7 @@ export const handler = middy(
     console.log("Processing Deletion of Event ", event)
     const todoId = event.pathParameters.todoId
     // const token = getTokenFromAuthorizationHeader(event.headers.Authorization);
-    const deleteResult = await deleteTodo(todoId, getUserId(event))
+    const deleteResult = await deleteTodo(todoId, event)
 
     if(deleteResult === null){
       return {

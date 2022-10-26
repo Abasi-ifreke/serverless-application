@@ -40,7 +40,7 @@ provider:
         - Effect: Allow
           Action:
             - xray:PutTelemetryRecords
-            - xray:PutTraceSegments
+            # - xray:PutTraceSegments
           Resource: "*"
 
 
@@ -63,7 +63,7 @@ functions:
      - Effect: Allow
        Action:
          - dynamodb:Query
-         - dynamodb:Scan
+        #  - dynamodb:Scan
        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
      - Effect: Allow
        Action:

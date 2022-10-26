@@ -3,8 +3,8 @@ import 'source-map-support/register'
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
-import { getAllTodo } from '../../helpers/todos'
-import { getUserId } from '../utils'
+import { getAllTodo } from '../../businessLogic/todos'
+// import { getUserId } from '../utils'
 import { createLogger } from '../../utils/logger'
 
 //import { getTodosForUser as getTodosForUser } from '../../businessLogic/todos'
@@ -20,7 +20,7 @@ export const handler = middy(
     // const split = authorization.split(' ');
     // const jwtToken = split[1];
     logger.info('Processing event: ', {event: event})
-    const todos = await getAllTodo(getUserId(event));
+    const todos = await getAllTodo(event);
 
     return {
         statusCode: 200,
